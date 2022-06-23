@@ -1,0 +1,84 @@
+package com.company;
+
+import java.util.Scanner;
+
+import com.company.Locations.Cave;
+import com.company.Locations.Forest;
+import com.company.Locations.Location;
+import com.company.Locations.River;
+import com.company.Locations.SafeHouse;
+import com.company.Locations.ToolStore;
+
+public class Game {
+    private Scanner input = new Scanner(System.in);
+
+    public void start() {
+        
+        System.out.print("Macera oyununa hoş geldiniz");
+        // System.out.print("Lütfen isminizi girin: ");
+        // String playerName = input.nextLine();
+
+        Player player = new Player("playerName");
+        System.out.println("Merhaba " + player.getName()
+                + ", bu karanlık ve sisli adaya hoşgeldin! Burada yaşananların hepsi gerçek!");
+        System.out.println("Lütfen bir karakter seçiniz");
+        player.selectChar();
+
+        Location location = null;
+        while (true) {
+            player.printInfo();
+            System.out.println();
+            System.out.println("**********  Bölgeler  **********");
+            System.out.println();
+            System.out.println("1.Güvenli ev-->Burası sizin için güvenli,düşman yoktur");
+            System.out.println("2.Eşya Dükkanı--> Silah ve ya zırh satın alabilirsiniz");
+            System.out.println("3.Mağara--> ÖDÜL: Yemek -> Mağaraya git, dikkatli ol Zombi çıkabilir !");
+            System.out.println("4.Orman-->  ÖDÜL:Odun   -> Ormana git, dikkatli ol Vampir çıkabilir !");
+            System.out.println("5.Nehir-->  ÖDÜL:Su     -> Nehire git, dikkatli ol Ayı çıkabilir !");
+
+            System.out.println("0.Çıkış Yap--> Oyunu Sonlandır ! ");
+            System.out.print("Lütfen gitmek istediğiniz bölgeyi seçin:  ");
+            int selectLoc = input.nextInt();
+            
+            switch (selectLoc) {
+                case 0:
+                    location = null;
+                    break;
+                case 1:
+                    location = new SafeHouse(player);
+                    break;
+                case 2:
+                    location = new ToolStore(player);
+                    break;
+                case 3:
+                    location = new Cave(player);
+                    break;
+                case 4:
+                    location = new Forest(player);
+                    break;
+                case 5:
+                    location = new River(player);
+                    break;
+                
+
+                default:
+                    //location = new SafeHouse(player);
+                    System.out.println("Lütfen geçerli bir bölge giriniz !");
+                    // break;
+
+            }
+
+            if (location == null) {
+                System.out.println("Bu karanlık ve sisli adadan çabuk vazgeçtin !");
+                break;
+            }
+
+            if (!location.onLocation()) {
+                System.out.println("Game Over!");
+                break;
+            }
+
+        }
+
+    }
+}
