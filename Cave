@@ -1,0 +1,14 @@
+package com.company.Locations;
+
+import com.company.Player;
+
+import Monsters.Zombie;
+
+public class Cave extends BattleLoc{
+
+    public Cave(Player player) {
+        super(player, "Mağara", new Zombie(), "food",3);
+    }
+    
+    
+}
