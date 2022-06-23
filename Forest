@@ -1,0 +1,14 @@
+package com.company.Locations;
+
+import com.company.Player;
+
+import Monsters.Vampire;
+
+public class Forest extends BattleLoc {
+
+    public Forest(Player player) {
+        super(player, "Orman", new Vampire(), "FireWood",3);
+    }
+    
+    
+}
